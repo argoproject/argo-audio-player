@@ -135,7 +135,7 @@ class ArgoAudioPlayer {
   function argo_audio_editor_media_gallery_shortcode( $html, $send_id, $attachment  ) {
 	$title = '';
 	$href = '';
-	if (preg_match("/\.mp3/",$html)) {
+	if (preg_match("/\.mp3|\.ogg|\.mp4|\.wav/",$html)) {
 	  /* Get the title from the html */
 	  preg_match("/\>.+\</",$html,$title);
 	  $title = $title[0];
@@ -145,9 +145,11 @@ class ArgoAudioPlayer {
 	  preg_match("/\'.+\'/",$html,$href);
 	  $href = $href[0];
 	  $href = preg_replace("/\'/","",$href);
-
-	}
 	  return sprintf( '[audio href="%s" title="%s"]Insert caption here[/audio]', $href, $title );
+	} else {
+	  return;
+	  
+	}
 	
   }
   /*
