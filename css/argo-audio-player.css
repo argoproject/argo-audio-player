@@ -1,0 +1,510 @@
+/****************** AUDIO PLAYER ********************/
+
+ul.playlist li {
+	margin-left:0
+}
+
+/* base audio styles */
+
+.spectrum-container {
+	display:none;
+}
+
+ul.use-spectrum li.sm2_playing .spectrum-container {
+	position:absolute;
+	left:0px;
+	top:0px;
+	margin-left:-266px;
+	margin-top:-1px;
+	display:block;
+	background-color:#5588bb;
+	border:1px solid #99ccff;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+
+ul.use-spectrum .spectrum-box {
+	position:relative;
+	width:255px;
+	font-size:14px;
+	padding:2px 0px;
+	height:1.2em;
+	overflow:hidden;
+}
+
+ul.use-spectrum .spectrum-box .spectrum {
+	position:absolute;
+	left:0px;
+	top:-2px;
+	margin-top:20px;
+	display:block;
+	font-size:1px;
+	width:1px;
+	height:1px; /* set to 50px for a thick line, 1px for a thin line, etc. */
+	overflow:hidden;
+	background-color:#fff;
+}
+
+ul.playlist {
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+
+ul.playlist li {
+ /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
+	position:relative;
+	display:block;
+	width:auto;
+	font-size:2em;
+	border:none;
+	letter-spacing:-1px;
+	background-color: #f9f9f9;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	min-height: 75px;
+ /* ZOMG WEB X.0. ;) */
+}
+
+#content ul.playlist li span.caption {
+	color:#666;
+	letter-spacing: .3px;
+	text-shadow: 1px 1px 1px #fff;
+	display:block;
+	line-height: 1.3;
+	font-size: 11px;
+	font-family: 'Helvetica', Arial, sans-serif;
+	font-weight: normal;
+}
+
+ul.playlist li a.inline {
+	padding:0.45em 0.5em 0.45em 0.5em;
+	-webkit-transition-property: hover;
+	-webkit-transition: background-color 0.5s ease-in-out;
+	color: #666;
+	display:block;
+	text-decoration:none;
+	font-weight:normal;
+	font-size:22px;
+	outline:none;
+	position:relative;
+	z-index:2;
+	background: transparent url(../img/audio-play-default.png) no-repeat 22px 5px;
+	line-height: 1;
+	margin-bottom: 10px;
+	padding-left:90px;
+}
+
+#content ul.playlist li a.exclude {
+	font-family: 'Helvetica', Arial, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	padding: 0 0 0 16px;
+	color: #aaa;
+	background: transparent url(../img/audio-download.png) no-repeat 0 1px;
+	position: absolute;
+	left: 10px;
+	top: 50px;
+	display:block;
+	z-index: 3;
+	width: 100px;
+	height: 30px;
+}
+
+ul.playlist li.sm2_playing,
+ul.playlist li.sm2_paused,
+ul.playlist li.sm2_playing a.inline {
+	color:#fff;
+	background-color: #eee;
+}
+
+#content ul.playlist li.sm2_playing a.inline,
+#content ul.playlist li.sm2_playing span.caption {
+	color: #666;
+}
+
+#content ul.playlist li.sm2_playing a.inline,
+#content ul.playlist li.sm2_paused a.inline {
+	max-width: 380px;
+}
+
+
+ul.playlist li a:hover.inline {
+	background: transparent url(../img/audio-play-hover.png) no-repeat 22px 5px;
+}
+
+ul.playlist li:hover {
+	background-color: #ededed;
+}
+
+ul.playlist li:hover a.inline {
+	color:#666;
+}
+
+ul.playlist li.sm2_playing,
+ul.playlist li.sm2_playing:hover {
+	background-color: #eee;
+}
+
+ul.playlist li.sm2_playing .inline,
+ul.playlist li.sm2_playing:hover .inline {
+	background: #eee url(../img/audio-play-pause.png) no-repeat 22px 5px;
+}
+
+ul.playlist li.sm2_paused {
+	background-color: #ededed
+}
+
+ul.playlist li.sm2_paused .inline {
+	background: transparent url(../img/audio-play-default.png) no-repeat 22px 5px;
+}
+ 
+ul.playlist li.sm2_playing:hover a.inline,
+ul.playlist li.sm2_paused a.inline {
+	color:#fff;
+}
+
+ul.playlist li .controls {
+	display:none;
+	padding: 5px;
+	background:#eee; 
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+ul.playlist li .peak,
+ul.playlist.use-peak li .peak {
+	display:none;
+	position:absolute;
+	top:0.55em;
+	right:0.5em;
+}
+
+ul.playlist li.sm2_playing .controls,
+ul.playlist li.sm2_paused .controls {
+	position:relative;
+	display:block;
+}
+
+ul.playlist.use-peak li.sm2_playing .peak,
+ul.playlist.use-peak li.sm2_paused .peak {
+	display:inline;
+	display:inline-block;
+}
+
+ul.playlist.use-peak li .peak {
+	display:none; /* IE 7 */
+}
+
+ul.playlist li.sm2_paused .controls {
+	background-color:#ddd;
+}
+
+ul.playlist li:hover .controls .statusbar {
+	position:relative;
+	cursor:ew-resize;
+	cursor:-moz-grab;
+	cursor:grab;
+}
+
+ul.playlist li.sm2_paused .controls .statusbar {
+	background-color:#eee;
+}
+
+ul.playlist li .controls {
+	position:relative;
+	margin-top:0.25em;
+	margin-bottom:0.25em;
+	background-color:#eee;
+}
+
+ul.playlist li .controls .statusbar {
+	position:relative;
+	height:0.5em;
+	background-color:#aaa;
+	overflow:hidden;
+	cursor:-moz-grab;
+	cursor:grab;
+}
+
+ul.playlist li .controls.dragging .statusbar {
+	cursor:-moz-grabbing;
+	cursor:grabbing;
+}
+
+ul.playlist li .controls .statusbar .position,
+ul.playlist li .controls .statusbar .loading,
+ul.playlist li .controls .statusbar .annotation {
+	position:absolute;
+	left:0px;
+	top:0px;
+	height:0.5em;
+}
+
+ul.playlist li .controls .statusbar .position {
+	background-color:#373737;
+	border-right:3px solid #373737;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+
+ul.playlist li.sm2_paused .controls .statusbar .position {
+	background-color:#aaa;
+	border-color:#aaa;
+}
+
+ul.playlist li .controls .statusbar .loading {
+	background-color:#fff;
+}
+
+ul.playlist li .controls .statusbar .position,
+ul.playlist li .controls .statusbar .loading {
+	width:0px;
+}
+
+ul.playlist li.sm2_playing a.sm2_link,
+ul.playlist li.sm2_paused a.sm2_link {
+	margin-right:4.5em; /* room for timing stuff */
+}
+
+ul.playlist li .timing {
+	position:absolute;
+	display:none;
+	text-align:right;
+	right:1em;
+	top:1em;
+	width:auto;
+	height:1em;
+	padding:3px 5px;
+	background-color:#aaa;
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	border-radius:4px;
+	letter-spacing:0px;
+	font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
+	line-height:1em;
+	vertical-align:middle;
+}
+
+ul.playlist.use-peak li .timing {
+	right:4.25em;
+}
+
+ul.playlist li:hover .timing {
+	z-index:2;
+}
+
+ul.playlist li .timing div.sm2_timing {
+	margin:0px;
+	padding:0px;
+	margin-top:-1em;
+}
+
+ul.playlist li.sm2_playing .timing,
+ul.playlist li.sm2_paused .timing {
+	display:block;
+}
+
+ul.playlist li.sm2_paused .timing .sm2_position {
+	text-decoration:blink; /* hee hee. first actual appropriate use? :D */
+}
+
+ul.playlist li.sm2_paused .timing,
+ul.playlist.use-peak li.sm2_paused .peak {
+	background-color:#aaa;
+}
+
+/* peak data */
+
+/* ul.playlist ... */
+
+ul.playlist.use-peak li .peak {
+	display:none;
+	zoom:1;
+	padding:2px;
+	height:0.55em;
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	border-radius:4px;
+	background-color:#aaa;
+	width:0.8em;
+	height:0.55em;
+	margin-top:-3px;
+}
+
+ul.playlist.use-peak li .peak-box {
+	position:relative;
+	width:100%;
+	height:0.55em;
+	overflow:hidden;
+}
+
+ul.playlist li .peak .l,
+ul.playlist li .peak .r {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:7px;
+	height:50px;
+	background:#fff;
+	border:1px solid #fff;
+	-moz-border-radius:1px;
+	-khtml-border-radius:1px;
+	margin-top:1em;
+}
+
+ul.playlist li .peak .l {
+	margin-right:1px;
+}
+
+ul.playlist li .peak .r {
+	left:10px;
+}
+
+#control-template {
+	display:none;
+}
+
+/* flash player audio */
+
+/*
+ SoundManager 2 + useFlashBlock
+ Flash positioning and flashblock / clicktoflash handling
+*/
+
+#sm2-container {
+ /*
+  where the SM2 flash movie goes. by default, relative container.
+  set relative or absolute here, and don't touch it later or bad things will happen (see below comments.)
+ */
+	position:relative;
+	width:1px;
+	height:1px;
+	_overflow:hidden; /* screw IE 6, just make it display nice */
+}
+
+#sm2-container object,
+#sm2-container embed {
+ /*
+  the actual movie bit.
+  SWF needs to be able to be moved off-screen without display: or position: changes. important.
+  changing display: or position: or overflow: here or on parent can cause SFW reload or other weird issues after unblock,
+  eg. SM2 starts but strange errors, no whileplaying() etc.
+ */
+	position:absolute;
+}
+
+#sm2-container object,
+#sm2-container embed,
+#sm2-container.swf_timedout,
+#sm2-container.swf_timedout object,
+#sm2-container.swf_timedout embed {
+ /* 
+  when SM2 didn't start normally, time-out case. flash blocked, missing SWF, no flash?
+  48px square flash placeholder is typically used by blockers.
+ */
+	left:auto;
+	top:auto;
+	width:48px;
+	height:48px;
+}
+
+#sm2-container.swf_unblocked {
+	/* SWF unblocked, or was never blocked to begin with; try to collapse container as much as possible. */
+	width:1px;
+	height:1px;
+}
+
+#sm2-container.swf_unblocked object,
+#sm2-container.swf_unblocked embed {
+	/* hide flash off-screen (relative to container) when it has loaded OK */
+	left:-9999em;
+	top:-9999em;
+}
+
+#sm2-container.swf_error {
+	/* when there is a fatal error (flash loaded, but SM2 failed) */
+	display:none;
+}
+
+#sm2-container.high_performance {
+	/* "high performance" case: keep on-screen at all times */
+	position:absolute;
+	position:fixed;
+	_top:-9999px; /* IE 6 hax, no position:fixed */
+	_left:-9999px;
+	bottom:0px;
+	left:0px;
+ /*
+  special case: show at first with w/h, hide when unblocked.
+  might be bad/annoying.
+ */
+	width:48px;
+	height:48px;
+	z-index:99; /* try to stay on top */
+}
+
+#sm2-container.high_performance.swf_unblocked {
+	z-index:auto;
+}
+
+#sm2-container.high_performance.swf_unblocked,
+#sm2-container.high_performance.swf_unblocked object,
+#sm2-container.high_performance.swf_unblocked embed {
+ /* 8x8px is required minimum to load in fx/win32 in some cases(?), 6x6+ good for fast performance, even better when on-screen via position:fixed */
+	width:8px;
+	height:8px;
+}
+
+#sm2-container.high_performance.swf_unblocked object,
+#sm2-container.high_performance.swf_unblocked embed {
+ /* high-performance case must stay on-screen */
+	left:auto;
+	top:auto;
+}
+
+#sm2-container.high_performance.swf_timedout {
+	z-index:99; /* try to stay on top */
+}
+
+/* 404 page */
+
+.search-404 #searchform, .search-404 #s2 {
+	position: relative;
+	top: 0;
+	right: 0;
+}
+
+.search-404 #searchform {
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #999;
+}
+
+/*no-js styles*/
+
+.no-js #primary, .no-js #category-sidebar {
+	display: block;
+	width: 290px;
+}
+
+.no-js .playlist li a.inline, .no-js .playlist li a:hover.inline, .ie6 .playlist li a.inline, .ie6 .playlist li a:hover.inline { 
+	background: transparent;
+	padding: 0;
+}
+
+.no-js .playlist .exclude, .ie6 .playlist .exclude {
+	display: none !important; 
+}
+
+.no-js .post-meta, .no-js #respond, .no-js #disqus_thread, .no-js .dsq-brlink, .no-js .network-branding {
+	display: none !important;
+}
+
