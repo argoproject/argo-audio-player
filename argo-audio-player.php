@@ -8,12 +8,12 @@ define( 'HALF_WIDTH', 300 );
 /* The Argo Audio Player Plugin class - so we don't have function naming conflicts */
 class ArgoAudioPlayer {
   
-  /* Install function, runs when the plugin is installed */
+  /* Install function, runs when the plugin is installed - not implemented */
   function install() {
 	
   }
   
-  /* Deactivate function, runs when the plugin is deactivated */
+  /* Deactivate function, runs when the plugin is deactivated - not implemented */
   function deactivate() {
 	
   }
@@ -135,7 +135,7 @@ class ArgoAudioPlayer {
   function argo_audio_editor_media_gallery_shortcode( $html, $send_id, $attachment  ) {
 	$title = '';
 	$href = '';
-	if (preg_match("/\.mp3|\.ogg|\.mp4|\.wav/",$html)) {
+	if (preg_match("/\.mp3|\.ogg|\.mp4|\.wav|\.m4a/",$html)) {
 	  /* Get the title from the html */
 	  preg_match("/\>.+\</",$html,$title);
 	  $title = $title[0];
