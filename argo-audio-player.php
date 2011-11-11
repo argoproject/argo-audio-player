@@ -34,14 +34,17 @@ class ArgoAudioPlayer {
 	add_filter( 'media_send_to_editor', array(__CLASS__,'argo_audio_editor_media_gallery_shortcode'), 10, 3 );
 	/* Add action to enqueue the jquery file for loading (this is called before the header loads)*/
 	add_action('get_header',array(__CLASS__,'ArgoGetWPHeader'));
-	
+	add_action('wp_head',array(__CLASS__,'ArgoWPHead'));
   }
   
   /* Make sure the jQuery is queued up to be loaded, because we need it! */
   function ArgoGetWPHEader() {
 	wp_enqueue_script("jquery");
   }
-  
+  /* Always load the css into the wp header, the only way it works right*/
+  function ArgoWPHEad() {
+	echo "<link rel='stylesheet' href='/wp-content/plugins/argo-audio-player/css/argo-audio-player.css'/>\n";
+  }
   /* Inserts the needed code into the themes footer */
   function ArgoWPFooter() {
 
@@ -49,8 +52,6 @@ class ArgoAudioPlayer {
 	echo "<script src='".plugins_url(null,__FILE__)."/js/sm.min.js'></script>";
 	echo "<script src='".plugins_url(null, __FILE__)."/js/sm.playlist.js'></script>";
 	
-	/* Uses jQuery to load the css styles into the header when needed*/
-	echo "<script src='".plugins_url(null, __FILE__)."/js/loadcss.js'></script>";
 	
 	/* Setup the SoundManager 2 swf directories*/
 	echo "<script>
