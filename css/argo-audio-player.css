@@ -473,38 +473,3 @@ ul.playlist li .peak .r {
 #sm2-container.high_performance.swf_timedout {
 	z-index:99; /* try to stay on top */
 }
-
-/* 404 page */
-
-.search-404 #searchform, .search-404 #s2 {
-	position: relative;
-	top: 0;
-	right: 0;
-}
-
-.search-404 #searchform {
-	margin-bottom: 20px;
-	padding-bottom: 20px;
-	border-bottom: 1px solid #999;
-}
-
-/*no-js styles*/
-
-.no-js #primary, .no-js #category-sidebar {
-	display: block;
-	width: 290px;
-}
-
-.no-js .playlist li a.inline, .no-js .playlist li a:hover.inline, .ie6 .playlist li a.inline, .ie6 .playlist li a:hover.inline { 
-	background: transparent;
-	padding: 0;
-}
-
-.no-js .playlist .exclude, .ie6 .playlist .exclude {
-	display: none !important; 
-}
-
-.no-js .post-meta, .no-js #respond, .no-js #disqus_thread, .no-js .dsq-brlink, .no-js .network-branding {
-	display: none !important;
-}
-
