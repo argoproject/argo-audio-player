@@ -1,8 +1,16 @@
 <?php
+/**
+ * @package Argo_Audio_Player
+ * @version 1.0
+ */
 /*
 Plugin Name: Argo Audio Player
+Plugin URI: 
 Description: The Argo Audio Player Plugin.
-Version: 0.1
+Author: 
+Version: 1.0
+Author URI:
+License: GPLv2
 */
 
 /* The Argo Audio Player Plugin class - so we don't have function naming conflicts */
