@@ -38,19 +38,13 @@ class ArgoAudioPlayer {
   }
   
   /* Make sure the jQuery is queued up to be loaded, because we need it! */
-  function ArgoGetWPHEader() {
+  function ArgoGetWPHeader() {
 	wp_enqueue_script("jquery");
   }
   /* Always load the css into the wp header, the only way it works right*/
-  function ArgoWPHEad() {
-	$style = plugins_url( 'css/argo-audio-player.css', __FILE__ );
-	echo "<link rel='stylesheet' href='$style'/>\n";
+  function ArgoWPHead() {
+	echo "<link rel='stylesheet' href='".plugins_url(null,__FILE__)."/css/argo-audio-player.css'/>\n";
   }
-  /*  	echo "<img src="' .plugins_url( 'images/wordpress.png' , dirname(__FILE__) ). '" > ';
-  
-  <link rel='stylesheet' href='/wp-content/plugins/argo-audio-player/css/argo-audio-player.css'/>\n
-  
-  */
 
   /* Inserts the needed code into the themes footer */
   function ArgoWPFooter() {
