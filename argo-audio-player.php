@@ -4,7 +4,7 @@ Plugin Name: Argo Audio Player
 Description: The Argo Audio Player Plugin.
 Version: 0.1
 */
-define( 'HALF_WIDTH', 300 );
+
 /* The Argo Audio Player Plugin class - so we don't have function naming conflicts */
 class ArgoAudioPlayer {
   
