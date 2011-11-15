@@ -7,7 +7,7 @@
 Plugin Name: Argo Audio Player
 Plugin URI: https://github.com/argoproject/argo-audio-player
 Description: The Argo Audio Player Plugin.
-Author: Project Argo
+Author: Project Argo, Mission Data
 Version: 1.0
 Author URI:
 License: GPLv2
