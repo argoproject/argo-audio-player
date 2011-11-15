@@ -1,8 +1,7 @@
 === Argo Audio Player ===
-Contributors: ??
-Donate link: ??
+Contributors: Project Argo
 Tags: audio, audio player 
-Requires at least: ??
+Requires at least: Only tested with 3.2.1
 Tested up to: 3.2.1
 Stable tag: 1.0
 
