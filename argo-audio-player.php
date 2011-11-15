@@ -5,7 +5,7 @@
  */
 /*
 Plugin Name: Argo Audio Player
-Plugin URI: 
+Plugin URI: https://github.com/argoproject/argo-audio-player
 Description: The Argo Audio Player Plugin.
 Author: 
 Version: 1.0
