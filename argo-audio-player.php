@@ -1,8 +1,16 @@
 <?php
+/**
+ * @package Argo_Audio_Player
+ * @version 1.0
+ */
 /*
 Plugin Name: Argo Audio Player
+Plugin URI: https://github.com/argoproject/argo-audio-player
 Description: The Argo Audio Player Plugin.
-Version: 0.1
+Author: Project Argo, Mission Data
+Version: 1.0
+Author URI:
+License: GPLv2
 */
 
 /* The Argo Audio Player Plugin class - so we don't have function naming conflicts */
@@ -38,19 +46,13 @@ class ArgoAudioPlayer {
   }
   
   /* Make sure the jQuery is queued up to be loaded, because we need it! */
-  function ArgoGetWPHEader() {
+  function ArgoGetWPHeader() {
 	wp_enqueue_script("jquery");
   }
   /* Always load the css into the wp header, the only way it works right*/
-  function ArgoWPHEad() {
-	$style = plugins_url( 'css/argo-audio-player.css', __FILE__ );
-	echo "<link rel='stylesheet' href='$style'/>\n";
+  function ArgoWPHead() {
+	echo "<link rel='stylesheet' href='".plugins_url(null,__FILE__)."/css/argo-audio-player.css'/>\n";
   }
-  /*  	echo "<img src="' .plugins_url( 'images/wordpress.png' , dirname(__FILE__) ). '" > ';
-  
-  <link rel='stylesheet' href='/wp-content/plugins/argo-audio-player/css/argo-audio-player.css'/>\n
-  
-  */
 
   /* Inserts the needed code into the themes footer */
   function ArgoWPFooter() {
