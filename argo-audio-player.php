@@ -35,7 +35,7 @@ class ArgoAudioPlayer {
 	 * so that we only load the plugin assets if they are needed
 	 * ie the shortcode is used on a page
 	*/
-	add_shortcode( 'audio', array(__CLASS__,'argo_audio_shortcode'));
+	
 	
 	/* Override the default add audio link to post action*/
 	add_filter( 'audio_send_to_editor_url', array(__CLASS__,'argo_audio_editor_shortcode'), 10, 3 );
@@ -43,8 +43,11 @@ class ArgoAudioPlayer {
 	/* Add action to enqueue the jquery file for loading (this is called before the header loads)*/
 	add_action('get_header',array(__CLASS__,'ArgoGetWPHeader'));
 	add_action('wp_head',array(__CLASS__,'ArgoWPHead'));
+  add_action('init',array(__CLASS__,'ArgoWordpressInit'));
   }
-  
+  function ArgoWordpressInit() {
+    add_shortcode( 'audio', array(__CLASS__,'argo_audio_shortcode'));
+  }
   /* Make sure the jQuery is queued up to be loaded, because we need it! */
   function ArgoGetWPHeader() {
 	wp_enqueue_script("jquery");
@@ -132,7 +135,7 @@ class ArgoAudioPlayer {
   function argo_audio_shortcode( $atts, $content ) {
 	  extract( $atts );
 	  /* Insert needed code into the footer */
-	add_action('wp_footer',array(__CLASS__,'ArgoWPFooter'));
+    add_action('wp_footer',array(__CLASS__,'ArgoWPFooter'));
 	  $html = ArgoAudioPlayer::argo_audio_editor_markup( $href, $title, $content );
 	  return $html;
   }
