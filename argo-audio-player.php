@@ -16,16 +16,6 @@ License: GPLv2
 /* The Argo Audio Player Plugin class - so we don't have function naming conflicts */
 class ArgoAudioPlayer {
   
-  /* Install function, runs when the plugin is installed - not implemented */
-  function install() {
-	
-  }
-  
-  /* Deactivate function, runs when the plugin is deactivated - not implemented */
-  function deactivate() {
-	
-  }
-  
   /* Initialize the plugin */
   function init() {
 	
@@ -35,17 +25,17 @@ class ArgoAudioPlayer {
 	 * so that we only load the plugin assets if they are needed
 	 * ie the shortcode is used on a page
 	*/
-	
-	
+
 	/* Override the default add audio link to post action*/
-	add_filter( 'audio_send_to_editor_url', array(__CLASS__,'argo_audio_editor_shortcode'), 10, 3 );
-	add_filter( 'media_send_to_editor', array(__CLASS__,'argo_audio_editor_media_gallery_shortcode'), 10, 3 );
+	add_filter( 'audio_send_to_editor_url', array(__CLASS__, 'argo_audio_editor_shortcode'), 10, 3 );
+	add_filter( 'media_send_to_editor', array(__CLASS__, 'argo_audio_editor_media_gallery_shortcode'), 10, 3 );
+
 	/* Add action to enqueue the jquery file for loading (this is called before the header loads)*/
-	add_action('get_header',array(__CLASS__,'ArgoGetWPHeader'));
-	add_action('wp_head',array(__CLASS__,'ArgoWPHead'));
-  add_action('init',array(__CLASS__,'ArgoWordpressInit'));
+	add_action('get_header', array(__CLASS__,'ArgoGetWPHeader'));
+	add_action('wp_print_styles' ,array(__CLASS__, 'add_styles'));
+	add_action('init',array(__CLASS__, 'add_audio_shortcode'));
   }
-  function ArgoWordpressInit() {
+  function add_audio_shortcode() {
     add_shortcode( 'audio', array(__CLASS__,'argo_audio_shortcode'));
   }
   /* Make sure the jQuery is queued up to be loaded, because we need it! */
@@ -53,8 +43,9 @@ class ArgoAudioPlayer {
 	wp_enqueue_script("jquery");
   }
   /* Always load the css into the wp header, the only way it works right*/
-  function ArgoWPHead() {
-	echo "<link rel='stylesheet' href='".plugins_url(null,__FILE__)."/css/argo-audio-player.css'/>\n";
+  function add_styles() {
+  	$css = plugins_url('css/argo-audio-player.css', __FILE__);
+  	wp_enqueue_style('argo-audio-player', $css, array(), 1);
   }
 
   /* Inserts the needed code into the themes footer */
