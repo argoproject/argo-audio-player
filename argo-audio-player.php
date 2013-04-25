@@ -131,7 +131,7 @@ class ArgoAudioPlayer {
 	  $href = preg_replace("/\'/","",$href);
 	  return sprintf( '[audio href="%s" title="%s"]Insert caption here[/audio]', $href, $title );
 	} else {
-	  return;
+	  return $html;
 	  
 	}
 	
