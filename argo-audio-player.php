@@ -30,6 +30,11 @@ class ArgoAudioPlayer {
 	add_filter( 'audio_send_to_editor_url', array(__CLASS__, 'argo_audio_editor_shortcode'), 10, 3 );
 	add_filter( 'media_send_to_editor', array(__CLASS__, 'argo_audio_editor_media_gallery_shortcode'), 10, 3 );
 
+        /**
+         *  Add filter to remove shortcode for NPR inject plugin
+         */
+	add_filter( 'npr_ds_shortcode_filter', array(__CLASS__, 'argo_audio_npr_ds_shortcode_filter'), 10, 3 );
+
 	/* Add action to enqueue the jquery file for loading (this is called before the header loads)*/
 	add_action('get_header', array(__CLASS__,'ArgoGetWPHeader'));
 	add_action('wp_print_styles' ,array(__CLASS__, 'add_styles'));
@@ -125,17 +130,34 @@ class ArgoAudioPlayer {
 	  $title = $title[0];
 	  $title = preg_replace("/\>|\</","",$title);
 	  $title = preg_replace("/_/"," ",$title);
-	  /* Get the url of the file from the html */
-	  preg_match("/\'.+\'/",$html,$href);
+
+	  preg_match("/(\"|\').+(\"|\')/",$html,$href);
 	  $href = $href[0];
-	  $href = preg_replace("/\'/","",$href);
+	  $href = preg_replace("/\"|\'/","",$href);
 	  return sprintf( '[audio href="%s" title="%s"]Insert caption here[/audio]', $href, $title );
 	} else {
 	  return $html;
 	  
 	}
-	
   }
+
+  public static function strip_shortcode($code, $content) {
+    global $shortcode_tags;
+
+    $stack = $shortcode_tags;
+    $shortcode_tags = array($code => 1);
+
+    $content = strip_shortcodes($content);
+
+    $shortcode_tags = $stack;
+    return $content;
+  }
+
+  function argo_audio_npr_ds_shortcode_filter( $text ) {
+    $content = ArgoAudioPlayer::strip_shortcode('audio', $text);
+    return $content;
+  }
+
   /*
    * ADMIN PRESENTATION CUSTOMIZATIONS
    */
